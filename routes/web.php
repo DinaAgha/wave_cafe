@@ -1,9 +1,10 @@
 <?php
-
 use App\Http\Controllers\dashController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\categoriesController;
 use Illuminate\Support\Facades\Route;
 use APP\Models\User;
+use App\Models\Categories;
 // Route::get('/home', function () {
 //     return view('layouts.main');
 // });
@@ -14,6 +15,12 @@ Route::post('insertClient',[dashController::class,'store'])->name('insertClient'
 Route::get('users',[dashController::class,'index'])->name('users');
 Route::get('addUser',[dashController::class,'create'])->name('addUser');
 Route::get('editUsers/{id}',[dashController::class,'edit'])->name('editUsers');
+
+// Route::post('insertClient',[dashController::class,'store'])->name('insertClient');
+Route::get('categories',[categoriesController::class,'index'])->name('categories');
+Route::get('addCategory',[categoriesController::class,'create'])->name('aaddCategory');
+Route::get('editCategories/{id}',[categoriesController::class,'edit'])->name('editCategories');
+
 Route::get('/', function () {
     if(auth()->check())
         return view('home');

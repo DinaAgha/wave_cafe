@@ -10,7 +10,7 @@ class categoriesController extends Controller
     public function index()
     {
         $clients = Categories::get();
-        return view('categories', compact('categories'));
+        return view('layouts.categories', compact('categories'));
     }
 
     public function create(): View
@@ -25,7 +25,7 @@ class categoriesController extends Controller
             'title' => ['required', 'string', 'max:255'],
         ],$messages);
         Categories::create($data);
-        return redirect('categories');
+        return redirect('layouts.categories');
     }
     public function show(string $id)
     {
@@ -52,7 +52,7 @@ class categoriesController extends Controller
     {
         $id = $request->id;
         Categories::where('id',$id)->delete();
-        return redirect('categories');
+        return redirect('layouts.categories');
     }
     public function trash()
     {

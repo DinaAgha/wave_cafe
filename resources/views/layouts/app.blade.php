@@ -29,7 +29,7 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+              welcome to the Admin 
             </main>
         </div>
     </body>

@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\dashController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use APP\Models\User;
-Route::get('/home', function () {
-    return view('layouts.main');
-});
-
+// Route::get('/home', function () {
+//     return view('layouts.main');
+// });
+// Route::get('/users', function () {
+//     $users = User::all();
+//     return view('layouts.users',compact('users'))})->name('users');
+Route::post('insertClient',[dashController::class,'store'])->name('insertClient');
+Route::get('users',[dashController::class,'index'])->name('users');
+Route::get('addUser',[dashController::class,'create'])->name('addUser');
+Route::get('editUsers/{id}',[dashController::class,'edit'])->name('editUsers');
 Route::get('/', function () {
     if(auth()->check())
         return view('home');

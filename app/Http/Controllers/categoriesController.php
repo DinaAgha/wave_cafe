@@ -2,68 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Categories;
-use App\Traits\UploadFile;
-
+use App\Models\Categories;
 use Illuminate\Http\Request;
-
+use Illuminate\View\View;
 class categoriesController extends Controller
 {
-    
+    public function index()
+    {
+        $clients = Categories::get();
+        return view('categories', compact('categories'));
+    }
+
+    public function create(): View
+    {
+        return view('layouts.addCategory');
+    }
+    public function store(Request $request) 
+    {
+        $messages = $this->errMsg();
+
+        $data=$request->validate([
+            'title' => ['required', 'string', 'max:255'],
+        ],$messages);
+        Categories::create($data);
+        return redirect('categories');
+    }
+    public function show(string $id)
+    {
+        $client = Categories::findOrFail($id);
+        return view('showCategory', compact('categories'));
+    }
+
+        public function errMsg(){
+            return [
+                'title.required' => 'The Category title is missed, please insert',
+            ];
+            }
+            public function edit(string $id)
+            {
+
+        $category = Categories::findOrFail($id);
+        return view('layouts.categories', compact('categories'));
+       
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function destroy(Request $request)
     {
-        return view('layouts.main', compact('categories'));
+        $id = $request->id;
+        Categories::where('id',$id)->delete();
+        return redirect('categories');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function trash()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categories $active)
-    {
-        // $message->read = 1;
-        // $message->save()
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $admin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $admin)
-    {
-        //
+        $trashed = Categories::onlyTrashed()->get();
+        return view('trashCategory', compact('trashed'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $admin)
-    {
-        //
-    }
+
 }

@@ -23,7 +23,7 @@
 						<div class="title_left">
 							<h3>Manage Categories</h3>
 						</div>
-
+						
 						<div class="title_right">
 							<div class="col-md-5 col-sm-5  form-group pull-right top_search">
 								<div class="input-group">
@@ -41,6 +41,8 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>Add Category</h2>
+									<form action="{{ route('insertCategories') }}" method="POST" enctype="multipart/form-data">
+						             @csrf
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -63,10 +65,10 @@
 									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Add Category <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="title" >Add Category <span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="title" required="required" class="form-control ">
+											<div class= "col-md-6 col-sm-6">
+												<input type="text" id="title" name ="title"  class="form-control" value="{{ old('title') }}">
 											</div>
 										</div>
 										
@@ -74,7 +76,7 @@
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button class="btn btn-primary" type="button">Cancel</button>
-												<button type="submit" class="btn btn-success">Add</button>
+												<button type="submit" value="Submit" class="btn btn-success">Add</button>
 											</div>
 										</div>
 

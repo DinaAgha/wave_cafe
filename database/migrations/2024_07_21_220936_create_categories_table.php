@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->timestamps();
+            $table->id(); // Auto-incrementing ID
+            $table->string('title'); // Category title
+            $table->timestamps(); // Created at and updated at timestamps
+            $table->softDeletes(); // Adds the deleted_at column for soft deletes
         });
-    
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('categories'); // Drops the categories table
     }
 };

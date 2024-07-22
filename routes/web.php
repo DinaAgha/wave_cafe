@@ -17,10 +17,11 @@ Route::get('addUser',[dashController::class,'create'])->name('addUser');
 Route::get('editUsers/{id}',[dashController::class,'edit'])->name('editUsers');
 
 // Route::post('insertClient',[dashController::class,'store'])->name('insertClient');
+Route::post('insertCategories',[categoriesController::class,'store'])->name('insertCategories');
 Route::get('categories',[categoriesController::class,'index'])->name('categories');
 Route::get('addCategory',[categoriesController::class,'create'])->name('aaddCategory');
 Route::get('editCategories/{id}',[categoriesController::class,'edit'])->name('editCategories');
-
+Route::delete('delCategories',[categoriesController::class,'destroy'])->name('delCategories');
 Route::get('/', function () {
     if(auth()->check())
         return view('home');

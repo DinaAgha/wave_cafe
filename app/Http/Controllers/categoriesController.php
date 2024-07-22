@@ -6,14 +6,16 @@ use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 class categoriesController extends Controller
+
+
 {
     public function index()
     {
-        $clients = Categories::get();
+        $categories = Categories::all();
         return view('layouts.categories', compact('categories'));
     }
 
-    public function create(): View
+    public function create()
     {
         return view('layouts.addCategory');
     }
@@ -25,12 +27,12 @@ class categoriesController extends Controller
             'title' => ['required', 'string', 'max:255'],
         ],$messages);
         Categories::create($data);
-        return redirect('layouts.categories');
+        return redirect('categories');
     }
     public function show(string $id)
     {
         $client = Categories::findOrFail($id);
-        return view('showCategory', compact('categories'));
+        return view('layouts.categories', compact('categories'));
     }
 
         public function errMsg(){
@@ -42,7 +44,7 @@ class categoriesController extends Controller
             {
 
         $category = Categories::findOrFail($id);
-        return view('layouts.categories', compact('categories'));
+        return view('layouts.editCategories', compact('categories'));
        
     }
     /**
@@ -52,16 +54,17 @@ class categoriesController extends Controller
     {
         $id = $request->id;
         Categories::where('id',$id)->delete();
-        return redirect('layouts.categories');
+        return redirect('categories');
     }
     public function trash()
     {
         $trashed = Categories::onlyTrashed()->get();
         return view('trashCategory', compact('trashed'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function restore(string $id)
+    {
+        Categories::where('id',$id)->restore();
+        return redirect('categories');
+    }
 
 }

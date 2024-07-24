@@ -18,6 +18,7 @@ class CreateMsgsTable extends Migration
             $table->string('clientname');
             $table->string('clientemail');
             $table->text('message');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }
@@ -27,8 +28,11 @@ class CreateMsgsTable extends Migration
      *
      * @return void
      */
+
     public function down()
-    {
-        Schema::dropIfExists('msgs');
-    }
+{
+    Schema::table('msgs', function (Blueprint $table) {
+        $table->dropColumn('read');
+    });
+}
 }

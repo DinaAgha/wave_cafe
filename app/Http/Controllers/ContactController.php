@@ -11,9 +11,16 @@ class ContactController extends Controller
     public function index()
     {
         $messages = Msg::all(); // Fetch all messages from the database
+        
         return view('layouts.messages', compact('messages')); // Pass messages to the view
     }
+  
 
+    public function count()
+    {
+        $unreadMessages = Msg::where('read', false)->get();
+        return view('adminIncludes.topnav', compact('unreadMessages'));
+    }
     // Method to create a new message (show the contact form)
     public function create()
     {
@@ -55,11 +62,16 @@ class ContactController extends Controller
     //     return redirect()->route('contact.create')->with('success', 'Your message has been sent successfully!');
     // }
 
-    // Method to show details of a specific message
-    public function show(Msg $message)
-    {
-        return view('layouts.message-details', compact('message'));
-    }
+    // // Method to show details of a specific message
+    // public function show(Msg $message)
+    // {
+    //     return view('layouts.message-details', compact('message'));
+    // }
+    public function show($id)
+{
+    $message = Msg::findOrFail($id); // Fetch the message or fail with a 404
+    return view('layouts.message', compact('message')); // Pass the message to the view
+}
 
     // Method to return custom error messages
     public function errMsg()

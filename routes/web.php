@@ -37,7 +37,9 @@ Route::post('addBevereg',[beverageController::class,'store'])->name('storeBevere
 Route::get('editBevereg/{id}',[beverageController::class,'edit'])->name('editBevereg');
 Route::put('updateBevereg/{id}',[beverageController::class,'update'])->name('updateBevereg');
 Route::delete('delBevereg',[beverageController::class,'destroy'])->name('delBevereg');
-Route::delete('forceDeleteBevereg',[beverageController::class,'forceDelete'])->name('forceDeleteBevereg');
+
+Route::delete('forceDeleteBevereg/{bevereges}',[beverageController::class,'delete'])->name('forceDeleteBevereg');
+
 Route::get('trashBevereg',[beverageController::class,'trash'])->name('trashBevereg');
 Route::get('restoreBevereg/{id}',[beverageController::class,'restore'])->name('restoreBevereg');
 
@@ -50,6 +52,7 @@ Route::get('editCategories/{id}',[categoriesController::class,'edit'])->name('ed
 Route::get('showCategory/{id}',[categoriesController::class,'show'])->name('showCategory');
 Route::put('updateCategory/{id}', [categoriesController::class, 'update'])->name('updateCategory');
 Route::delete('delCategories',[categoriesController::class,'destroy'])->name('delCategories');
+
 Route::delete('forceDeleteCategory/{category}',[categoriesController::class,'delete'])->name('forceDeleteCategory');
 Route::get('trashCategory',[categoriesController::class,'trash'])->name('trashCategory');
 Route::get('restoreCategory/{id}',[categoriesController::class,'restore'])->name('restoreCategory');
@@ -63,6 +66,7 @@ Route::post('contact', [ContactController::class, 'store'])->name('contact.store
 Route::get('messages', [ContactController::class, 'index'])->name('messages.index');
 Route::get('messages/{id}', [ContactController::class, 'show'])->name('messages.show');
 Route::post('messages/delete', [ContactController::class, 'destroy'])->name('delCategories');
+Route::get('/messages/count', [ContactController::class, 'count'])->name('messages.count');
 
 Route::post('recForm1', [MyController::class,'receiveData'])->name('receiveForm1');
 

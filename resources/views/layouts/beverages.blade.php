@@ -84,7 +84,13 @@
                           <td>{{$beverege->bname}}</td>
                           <td>{{$beverege->published ? 'Yes' : 'No' }}</td>
                           <td><a href="{{ route('editBevereg', $beverege->id) }}"><img src="{{asset('adminassets/./images/edit.png')}}" alt="Edit"></td>
-                          <td><a href="{{ route('delBevereg', $beverege->id) }}"></a><img src="{{asset('adminassets/./images/delete.png')}}" alt="Delete"></td>
+                          <td><form action="{{ route('forceDeleteBevereg', $beverege->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('Are you sure you want to delete this beverage?')" style="border: none; background: none; padding: 0;">
+            <img src="{{ asset('adminassets/images/delete.png') }}" alt="Delete">
+        </button>
+    </form>
                         </tr>
                         @endforeach 
                       </tbody>

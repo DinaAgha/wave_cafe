@@ -1,8 +1,9 @@
 <div id="special" class="tm-page-content">
-  <div class="tm-special-items">
+  <!-- <div class="tm-special-items"> -->
     @foreach($special as $item)
     <div class="tm-black-bg tm-special-item">
-      <img src="{{asset('assets/images/'. $item->image )}}" alt="Image">
+  
+    <img src="{{ asset('assets/images/' . $item->image) }}" alt="Image" style="width: 300px; height: 300px;">
       <div class="tm-special-item-description">
         <h2 class="tm-text-primary tm-special-item-title">{{$item->bname}}</h2>
         <p class="tm-special-item-text">{{$item->descrip}}</p>

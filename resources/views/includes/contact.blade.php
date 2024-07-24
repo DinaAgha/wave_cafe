@@ -1,8 +1,4 @@
 <div id="contact" class="tm-page-content">
-    <div class="tm-black-bg tm-contact-text-container">
-        <h2 class="tm-text-primary">Contact Wave</h2>
-        <p>Wave Cafe Template has a video background. You can use this layout for your websites. Please contact Tooplate's Facebook page. Tell your friends about our website.</p>
-    </div>
     <div class="tm-black-bg tm-contact-form-container tm-align-right">
         <form action="{{ route('contact.store') }}" method="POST" id="contact-form">
             @csrf <!-- Include CSRF token for security -->
@@ -21,5 +17,8 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="tm-black-bg tm-contact-text-container tm-align-left">
+        <h2 class="tm-text-primary">Contact Wave</h2>
     </div>
 </div>

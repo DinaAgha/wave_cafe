@@ -118,13 +118,11 @@ public function store(Request $request)
         $trashed = Beverages::onlyTrashed()->get();
         return view('trashBevereg', compact('trashed'));
     }
-    public function forceDelete(Request $request)
-    {
-        $id = $request->id;
-        Beverages::where('id',$id)->forceDelete();
-        return redirect('trashBeverages');
-    }
 
+    public function delete( Beverages $bevereges){
+        $bevereges->delete();
+        return back();
+    }
     public function restore(string $id)
     {
         Beverages::where('id',$id)->restore();

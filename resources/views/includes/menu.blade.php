@@ -23,7 +23,7 @@
             <div id="{{$category->id}}" class="tm-tab-content">
               <div class="tm-list">
                 @foreach($category->beverages as $item)
-                <div class="tm-list-item">          
+             
                   <img src="{{asset('assets/images/'. $item->image)}}" alt="Image" class="tm-list-item-img">
                   <div class="tm-black-bg tm-list-item-text">
                     <h3 class="tm-list-item-name">{{$item->bname}}<span class="tm-list-item-price">${{$item->price}}</span></h3>

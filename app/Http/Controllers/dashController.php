@@ -23,21 +23,22 @@ class dashController extends Controller
         $messages = $this->errMsg();
 
         $data = $request->validate([
-            'name' => 'required|max:100|min:5',
-            'username' => 'required|max:100|min:5',
+            'name' => 'required|max:100|min:3',
+            'username' => 'required|max:100|min:3',
             'email' => 'required|email:rfc',
             'password' => 'required|min:8',
         ], $messages);
         $data['active'] = isset($request->active);
+        $data['email_verified_at'] = now();
         User::create($data);
         return redirect('users');
     }
     public function errMsg(){
         return [
             'name.required' => 'The Full name is missed, please insert',
-            'name.min' => 'length less than 5, please insert more chars',
+            'name.min' => 'length less than 3, please insert more chars',
             'username.required' => 'The User name is missed, please insert',
-            'username.min' => 'length less than 5, please insert more chars',
+            'username.min' => 'length less than 3, please insert more chars',
             'email.required' =>'The Email Adress is missed, please insert',
             'password.min' => 'length less than 8, please insert more chars',
         ];

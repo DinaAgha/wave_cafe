@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID
-            $table->string('title'); // Category title
+            $table->string('title')->unique(); // Category title
             $table->timestamps(); // Created at and updated at timestamps
             $table->softDeletes(); // Adds the deleted_at column for soft deletes
         });

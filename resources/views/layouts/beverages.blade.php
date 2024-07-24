@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('adminIncludes.header')
-@include('adminIncludes.head')
-
-					
-					<!-- /sidebar menu -->
-					@include('adminIncludes.sidebar')
-					<!-- /menu footer buttons -->
-					@include('adminIncludes.menu')
-					<!-- /menu footer buttons -->
-				</div>
-			</div>
-
-			<!-- top navigation -->
-			@include('adminIncludes.topnav')
-			<!-- /top navigation -->
-	
-    
+  @include('adminIncludes.header')
+  @include('adminIncludes.head')
+  
+            
+            <!-- /sidebar menu -->
+            @include('adminIncludes.sidebar')
+            <!-- /menu footer buttons -->
+            @include('adminIncludes.menu')
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+  
+        <!-- top navigation -->
+        @include('adminIncludes.topnav')
+        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Manage Categories</h3>
+                <h3>Manage Beverage</h3>
               </div>
 
               <div class="title_right">
@@ -44,7 +42,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List of Categories</h2>
+                    <h2>List of Beverages</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -67,7 +65,9 @@
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-                          <th>Category Name</th>
+                          <th>Beverage Date</th>
+                          <th>Title</th>
+                          <th>Published</th>
                           <th>Edit</th>
                           <th>Delete</th>
                         </tr>
@@ -75,27 +75,18 @@
 
 
                       <tbody>
-                      @foreach ($categories as $category)
-                        <tr>            
-                      <td>{{ $category->title }}</td>
-                      <td>
-    <a href="{{ route('editCategories', $category->id) }}">
-        <img src="{{ asset('adminassets/images/edit.png') }}" alt="Edit">
-    </a>
-</td>
-<td>
-    <form action="{{ route('forceDeleteCategory', $category->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')" style="border: none; background: none; padding: 0;">
-            <img src="{{ asset('adminassets/images/delete.png') }}" alt="Delete">
-        </button>
-    </form>
-</td>
-
-                          
-                      </tr>
-                      @endforeach
+                        <tr>
+                        @foreach ($bevereges as $beverege)
+                        </tr>
+                        <tr>
+                          <td>{{$beverege->beverage_date}}</td>
+                 
+                          <td>{{$beverege->bname}}</td>
+                          <td>{{$beverege->published ? 'Yes' : 'No' }}</td>
+                          <td><a href="{{ route('editBevereg', $beverege->id) }}"><img src="{{asset('adminassets/./images/edit.png')}}" alt="Edit"></td>
+                          <td><a href="{{ route('delBevereg', $beverege->id) }}"></a><img src="{{asset('adminassets/./images/delete.png')}}" alt="Delete"></td>
+                        </tr>
+                        @endforeach 
                       </tbody>
                     </table>
                   </div>
@@ -108,9 +99,14 @@
           </div>
         </div>
         <!-- /page content -->
-        @include('adminIncludes.footer')
-        <!-- footer content -->
-  
+        <footer>
+				<div class="pull-right">
+					Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
 
+        <!-- footer content -->
+        @include('adminIncludes.footer')
   </body>
 </html>

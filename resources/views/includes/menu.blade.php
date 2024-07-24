@@ -3,7 +3,7 @@
 
 <nav class="tm-black-bg tm-drinks-nav">
               <ul>
-                <li>
+                <!-- <li>
                   <a href="#" class="tm-tab-link active" data-id="cold">Iced Coffee</a>
                 </li>
                 <li>
@@ -11,11 +11,34 @@
                 </li>
                 <li>
                   <a href="#" class="tm-tab-link" data-id="juice">Fruit Juice</a>
+                </li> -->
+                @foreach($categories as $category)
+                <li>
+                  <a href="#" class="tm-tab-link" data-id="{{$category->id}}">{{$category->title}}</a>
                 </li>
+                @endforeach
               </ul>
             </nav>
+            @foreach($categories as $category)
+            <div id="{{$category->id}}" class="tm-tab-content">
+              <div class="tm-list">
+                @foreach($category->beverages as $item)
+                <div class="tm-list-item">          
+                  <img src="{{asset('assets/images/'. $item->image)}}" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">{{$item->bname}}<span class="tm-list-item-price">${{$item->price}}</span></h3>
+                    <p class="tm-list-item-description">{{$item->descrip}}</p>
+                  </div>
+                </div>
+                @endforeach
+                                       
+              </div>
+            </div> 
+            @endforeach
 
-            <div id="cold" class="tm-tab-content">
+
+
+            <!-- <div id="cold" class="tm-tab-content">
               <div class="tm-list">
                 <div class="tm-list-item">          
                   <img src="{{asset('assets/img/iced-americano.png')}}" alt="Image" class="tm-list-item-img">
@@ -115,4 +138,4 @@
                   </div>
                 </div>              
               </div>
-            </div>
+            </div> -->

@@ -4,67 +4,75 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-class categoriesController extends Controller
 
-
+class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Categories::all();
-        return view('layouts.categories', compact('categories'));
+        $categories = Categories::all(); // Fetch all categories
+        return view('layouts.categories', compact('categories')); // Pass categories to the view
     }
 
     public function create()
     {
         return view('layouts.addCategory');
     }
-    public function store(Request $request) 
-    {
-        $messages = $this->errMsg();
 
-        $data=$request->validate([
+    public function store(Request $request)
+    {
+        $request->validate([
+
             'title' => ['required', 'string', 'max:255'],
-        ],$messages);
-        Categories::create($data);
-        return redirect('categories');
+        ]);
+
+        Categories::create($request->all());
+
+        return redirect()->route('categories')->with('success', 'Category created successfully.');
     }
-    public function show(string $id)
+
+    public function edit($id)
     {
-        $client = Categories::findOrFail($id);
-        return view('layouts.categories', compact('categories'));
-    }
-
-        public function errMsg(){
-            return [
-                'title.required' => 'The Category title is missed, please insert',
-            ];
-            }
-            public function edit(string $id)
-            {
-
-        $category = Categories::findOrFail($id);
+        $categories= Categories::findOrFail($id);
         return view('layouts.editCategories', compact('categories'));
-       
     }
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+        ]);
+
+        $categories = Categories::findOrFail($id);
+        $categories->update($request->all());
+
+        return redirect()->route('categories')->with('success', 'Category updated successfully.');
+    }
+
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        Categories::where('id',$id)->delete();
-        return redirect('categories');
+        $request->validate([
+            'id' => 'required|exists:categories,id',
+        ]);
+
+        Categories::destroy($request->id);
+
+        return redirect()->route('categories')->with('success', 'Category deleted successfully.');
+    }
+
+    public function delete(Categories $category){
+        $category->delete();
+        return back();
     }
     public function trash()
     {
         $trashed = Categories::onlyTrashed()->get();
         return view('trashCategory', compact('trashed'));
     }
-    public function restore(string $id)
-    {
-        Categories::where('id',$id)->restore();
-        return redirect('categories');
-    }
 
+    public function restore($id)
+    {
+        $categories = Categories::onlyTrashed()->findOrFail($id);
+        $categories->restore();
+        return redirect()->route('categories')->with('success', 'Category restored successfully.');
+    }
 }

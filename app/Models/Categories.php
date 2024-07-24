@@ -14,4 +14,12 @@ class Categories extends Model
     protected $fillable = [
         'title',
     ];
+
+    public function beverages() {
+     return $this->hasMany(Beverages::class, 'category_id');
+    }
+    public static function getAllCategories()
+{
+    return self::all();
+}
 }

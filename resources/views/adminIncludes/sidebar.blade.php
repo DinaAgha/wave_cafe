@@ -21,7 +21,7 @@
             </li>
             <li><a><i class="fa fa-desktop"></i> Beverages <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="addBeverage">Add Beverage</a></li>
+                    <li><a href="addBevereg">Add Beverage</a></li>
                     <li><a href="beverages">Beverages List</a></li>
                 </ul>
             </li>
